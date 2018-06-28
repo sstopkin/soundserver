@@ -1,0 +1,15 @@
+[Soundserver deps]
+
+NodeJS v8+
+MongoDB
+
+To install js deps - $npm install --save-dev
+To start service - $node app.js
+
+[Soundserver service]
+
+Note if you're new to Unix: /var/soundserver/web-ui/app.js should have #!/usr/bin/env node on the very first line.
+Copy your service file into the /etc/systemd/system.
+Start it with systemctl start soundserver.
+Enable it to run on boot with systemctl enable soundserver.
+See logs with journalctl -u soundserver

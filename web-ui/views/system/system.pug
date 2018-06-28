@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 System
+
+  form.form-horizontal(action='/system/reboot', method='POST', onsubmit="return confirm('Are you sure you want to reboot?');")
+    .form-group
+      p.col-sm-offset-3.col-sm-4 Reboot
+      input(type='hidden', name='_csrf', value=_csrf)
+      .col-sm-offset-3.col-sm-4
+        button.btn.btn-danger(type='submit')
+          i.fas.fa-trash-alt.fa-sm
+          | Reboot

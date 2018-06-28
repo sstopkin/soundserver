@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Sound server status
+
+    table.table.table-striped.table-bordered
+      thead
+        tr
+          th Channel
+          th Status
+          th Volume
+          th Frequency
+          th.hidden-xs Codec
+          th.hidden-xs Port
+      tbody
+        for channel in channels
+          tr
+            td= channel.id
+            td= channel.status
+            td= channel.volume
+            td= channel.frequency
+            td.hidden-xs= channel.codec
+            td.hidden-xs= channel.port

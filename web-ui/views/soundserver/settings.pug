@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Sound server settings
+
+    table.table.table-striped.table-bordered
+      thead
+        tr
+          th Channel
+          th Status
+          th Volume
+          th Frequency
+          th.hidden-xs Codec
+          th.hidden-xs Port
+          th.hidden-xs Save
+      tbody
+        for channel in channels
+          tr
+            form.form-horizontal(action='/soundserver/settings', method='POST')
+              input(type='hidden', name='_csrf', value=_csrf)
+              td
+                input.form-control(type='text', name='id', id='id', value=channel.id, readonly="readonly")
+              td
+                input.form-control(type='checkbox', name='status', checked=(channel.status==='true' ? true : false))
+              td
+                input.form-control(type='text', name='volume', id='volume', placeholder='0', required, value=channel.volume)
+              td
+                select.form-control(id='frequency', name='frequency')
+                  each frequency in ["22000", "41000", "44000"]
+                    option(value=frequency selected=(frequency===channel.frequency) ) #{frequency}
+              td
+                select.form-control(id='codec' name='codec')
+                  each codec in ["opus", "adpcm"]
+                    option(value=codec selected=(codec===channel.codec) ) #{codec}
+              td
+                input.form-control(type='text', name='port', id='port', placeholder='0', required, value=channel.port)
+              td
+                button.btn.btn-success(type='submit', placeholder='0') Save
