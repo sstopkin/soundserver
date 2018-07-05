@@ -3,14 +3,15 @@
 Description=Soundserver
 
 [Service]
-ExecStart=/var/soundserver/web-ui/app.js
+ExecStart=/usr/bin/node /var/soundserver/web-ui/app.js
 Restart=always
-User=nobody
+#User=nobody
 # Note RHEL/Fedora uses 'nobody', Debian/Ubuntu uses 'nogroup'
-Group=nobody
-Environment=PATH=/usr/bin:/usr/local/bin
-Environment=NODE_ENV=production
+#Group=nobody
+#Environment=PATH=/usr/bin:/usr/local/bin
+#Environment=NODE_ENV=example
 WorkingDirectory=/var/soundserver/web-ui
+KillSignal=SIGINT
 
 [Install]
 WantedBy=multi-user.target
