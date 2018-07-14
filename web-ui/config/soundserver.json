@@ -1,5 +1,5 @@
 {
   "channels": "2",
-  "dataDir" : "/var/omsklug/data",
+  "dataDir" : "/var/soundserver/data",
   "paramSet": ["status","volume","frequency","codec","port"]
 }
