@@ -27,7 +27,7 @@ block content
                 input.form-control(type='text', name='volume', id='volume', placeholder='0', required, value=channel.volume)
               td
                 select.form-control(id='frequency', name='frequency')
-                  each frequency in ["22000", "41000", "44000"]
+                  each frequency in ["44100","32000","22050","16000","11025","8000"]
                     option(value=frequency selected=(frequency===channel.frequency) ) #{frequency}
               td
                 select.form-control(id='codec' name='codec')

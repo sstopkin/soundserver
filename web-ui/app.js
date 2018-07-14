@@ -33,7 +33,6 @@ dotenv.load({ path: '/var/soundserver/web-ui/.env.example' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
-const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 const soundserverController = require('./controllers/soundserver');
 const systemController = require('./controllers/system');
@@ -64,9 +63,31 @@ mongoose.connection.on('error', (err) => {
  */
 app.set('host', process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
 app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-app.use(expressStatusMonitor());
+app.use(expressStatusMonitor({
+  title: 'Sound Server Status',
+  path: '/status',
+  spans: [
+    { interval: 1,            // Every second
+      retention: 60           // Keep 60 datapoints in memory
+    }, {
+      interval: 5,            // Every 5 seconds
+      retention: 60
+    }, {
+      interval: 15,           // Every 15 seconds
+      retention: 60
+    }],
+  chartVisibility: {
+    cpu: true,
+    mem: true,
+    load: true,
+    responseTime: true,
+    rps: true,
+    statusCodes: true
+  }
+}));
 app.use(compression());
 app.use(sass({
   src: path.join(__dirname, 'public'),
@@ -106,7 +127,7 @@ app.use((req, res, next) => {
   // After successful login, redirect back to the intended page
   if (!req.user &&
     req.path !== '/login' &&
-    req.path !== '/signup' &&
+    // req.path !== '/signup' &&
     !req.path.match(/^\/auth/) &&
     !req.path.match(/\./)) {
     req.session.returnTo = req.originalUrl;
@@ -129,8 +150,6 @@ app.get('/forgot', userController.getForgot);
 app.post('/forgot', userController.postForgot);
 app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
-app.get('/signup', userController.getSignup);
-app.post('/signup', userController.postSignup);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
@@ -142,12 +161,6 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 /**
  * API examples routes.
  */
-app.get('/api', apiController.getApi);
-app.get('/api/upload', apiController.getFileUpload);
-app.post('/api/upload', upload.single('myFile'), apiController.postFileUpload);
-// app.get('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getPinterest);
-// app.post('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postPinterest);
-// app.get('/api/google-maps', apiController.getGoogleMaps);
 app.get('/system', passportConfig.isAuthenticated, systemController.getSystem);
 app.post('/system/reboot', passportConfig.isAuthenticated, systemController.rebootSystem);
 

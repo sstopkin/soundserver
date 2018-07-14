@@ -1,13 +1,13 @@
 {
-  "name": "hackathon-starter",
-  "version": "5.0.0",
-  "description": "A boilerplate for Node.js web applications",
+  "name": "soundserver-webui",
+  "version": "0.1.0",
+  "description": "Soundserver webui controller",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/hackathon-starter.git"
+    "url": "https://github.com/sstopkin/soundserver.git"
   },
   "author": "Sahat Yalkabov",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "scripts": {
     "postinstall": "npm rebuild node-sass",
     "start": "node app.js",
@@ -27,7 +27,7 @@
     "express": "^4.16.3",
     "express-flash": "^0.0.2",
     "express-session": "^1.15.6",
-    "express-status-monitor": "^1.0.1",
+    "express-status-monitor": "^1.1.4",
     "express-validator": "^5.1.0",
     "lob": "^5.2.0",
     "lusca": "^1.5.2",
@@ -43,7 +43,7 @@
     "request": "^2.85.0",
     "stripe": "^5.6.1",
     "validator": "^9.4.1",
-    "shelljs": "0.8.2"
+    "shelljs": "^0.8.2"
   },
   "devDependencies": {
     "chai": "^4.1.2",
