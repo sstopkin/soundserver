@@ -28,7 +28,7 @@ exports.getSettings = (req, res) => {
 function getChannels(){
   var channelsCount=soundServerConfig.channels;
   let channels=[];
-  for (let id=1; id<=channelsCount; id++) {
+  for (let id=0; id<channelsCount; id++) {
     let item={};
     item.id=id;
     soundServerConfig.paramSet.forEach(function(param){
@@ -111,7 +111,7 @@ exports.postSettings = (req, res, next) => {
 
   var chId=req.body.id;
 
-shell.exec('/home/best/soundserver-webui/soundserver-webui/service.sh '+chId, function(code, stdout, stderr) {
+shell.exec(soundServerConfig.scriptsDir+'/service.sh '+chId, function(code, stdout, stderr) {
   console.log('Exit code:', code);
   console.log('Program output:', stdout);
   console.log('Program stderr:', stderr);
