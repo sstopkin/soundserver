@@ -12,7 +12,6 @@ block content
           th Volume
           th Frequency
           th.hidden-xs Codec
-          th.hidden-xs Port
           th.hidden-xs Save
       tbody
         for channel in channels
@@ -33,7 +32,5 @@ block content
                 select.form-control(id='codec' name='codec')
                   each codec in ["opus", "adpcm"]
                     option(value=codec selected=(codec===channel.codec) ) #{codec}
-              td
-                input.form-control(type='text', name='port', id='port', placeholder='0', required, value=channel.port)
               td
                 button.btn.btn-success(type='submit', placeholder='0') Save

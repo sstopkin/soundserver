@@ -43,7 +43,7 @@ function getChannels(){
     channels.push(item);
   }
   // console.log(channels);
-  // [{ id: 1, status: 'Rob', volume: 'Title 1',frequency: 'Title 1',codec: 'Title 1',port: 'Title 1'}]
+  // [{ id: 1, status: 'Rob', volume: 'Title 1',frequency: 'Title 1',codec: 'Title 1'}]
   return channels;
 }
   // if (!req.query.id) {
@@ -56,7 +56,6 @@ function getChannels(){
   // td= channel.volume
   // td= channel.frequency
   // td.hidden-xs= channel.codec
-  // td.hidden-xs= channel.port
 
   // req.assert('query.id', 'Name cannot be blank').notEmpty();
   // req.query.id
@@ -94,13 +93,11 @@ exports.postSettings = (req, res, next) => {
 // volume: 55
 // frequency: 41000
 // codec: opus
-// port: 50000
   req.assert('id', 'id must be present').notEmpty();
   // req.assert('status', 'status must be present').notEmpty();
   req.assert('volume', 'volume should be int from 0-100').isInt({ min: 0, max: 100 });
   req.assert('frequency', 'frequency should be present').notEmpty();
   req.assert('codec', 'codec should be present').notEmpty();
-  req.assert('port', 'port should be present in range 1024-65535').isInt({ min: 1024, max: 65535 });
 
   const errors = req.validationErrors();
 
@@ -123,7 +120,6 @@ shell.exec(soundServerConfig.scriptsDir+'/service.sh '+chId, function(code, stdo
   writeSettings(chId, 'volume', req.body.volume);
   writeSettings(chId, 'frequency', req.body.frequency);
   writeSettings(chId, 'codec', req.body.codec);
-  writeSettings(chId, 'port', req.body.port);
 
   // User.findById(req.user.id, (err, user) => {
   //   if (err) { return next(err); }
@@ -141,4 +137,3 @@ shell.exec(soundServerConfig.scriptsDir+'/service.sh '+chId, function(code, stdo
 // GET /volume?id=channelid
 // GET /frequency?id=channelid
 // GET /codec?id=channelid
-// GET /port?id=channelid

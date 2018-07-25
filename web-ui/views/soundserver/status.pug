@@ -12,7 +12,6 @@ block content
           th Volume
           th Frequency
           th.hidden-xs Codec
-          th.hidden-xs Port
       tbody
         for channel in channels
           tr
@@ -21,4 +20,3 @@ block content
             td= channel.volume
             td= channel.frequency
             td.hidden-xs= channel.codec
-            td.hidden-xs= channel.port
