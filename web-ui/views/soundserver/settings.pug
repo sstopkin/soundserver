@@ -33,7 +33,7 @@ block content
                     option(value=frequency selected=(frequency===channel.frequency) ) #{frequency}
               td
                 select.form-control(id='codec' name='codec')
-                  each codec in ["opus", "adpcm"]
+                  each codec in ["libopus", "pcm_alaw"]
                     option(value=codec selected=(codec===channel.codec) ) #{codec}
               td
                 button.btn.btn-success(type='submit', placeholder='0') Save
