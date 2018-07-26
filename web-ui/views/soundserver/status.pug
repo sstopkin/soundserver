@@ -8,6 +8,7 @@ block content
       thead
         tr
           th Channel
+          th Present
           th Status
           th Volume
           th Frequency
@@ -16,6 +17,7 @@ block content
         for channel in channels
           tr
             td= channel.id
+            td= channel.present
             td= channel.status
             td= channel.volume
             td= channel.frequency

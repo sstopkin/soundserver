@@ -61,15 +61,6 @@ function getChannels(){
   // req.query.id
   // console.log(res);
 
-exports.getChannelState = (req, res) => {
-  let fromName;
-  let fromEmail;
-  if (!req.user) {
-    req.assert('name', 'Name cannot be blank').notEmpty();
-    req.assert('email', 'Email is not valid').isEmail();
-  }
-}
-
 function writeSettings(chId, param, val){
   console.log(param, val);
 //   try {

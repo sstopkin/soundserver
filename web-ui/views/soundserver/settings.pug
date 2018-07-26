@@ -8,6 +8,7 @@ block content
       thead
         tr
           th Channel
+          th Present
           th Status
           th Volume
           th Frequency
@@ -20,6 +21,8 @@ block content
               input(type='hidden', name='_csrf', value=_csrf)
               td
                 input.form-control(type='text', name='id', id='id', value=channel.id, readonly="readonly")
+              td
+                input.form-control(type='checkbox', name='present', checked=(channel.present==='true' ? true : false), disabled)
               td
                 input.form-control(type='checkbox', name='status', checked=(channel.status==='true' ? true : false))
               td

@@ -1,6 +1,6 @@
 {
   "channels": "2",
   "dataDir" : "/var/soundserver/data",
-  "paramSet": ["status","volume","frequency","codec"],
+  "paramSet": ["present","status","volume","frequency","codec"],
   "scriptsDir": "/var/soundserver/scripts"
 }
