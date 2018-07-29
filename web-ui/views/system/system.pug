@@ -4,25 +4,27 @@ block content
   .page-header
     h3 System
 
-  table.table.table-striped.table-bordered
-    thead
-      tr
-        th Parameter
-        th Value
-      tbody
-        for data in systemData
-          tr
-            td= data.name
-            td= data.value
+  .row
+    table.table.table-striped.table-bordered
+      thead
+        tr
+          th Parameter
+          th Value
+          tbody
+            for data in systemData
+              tr
+                td= data.name
+                td= data.value
 
-  form.form-horizontal(action='/system/reboot', method='POST', onsubmit="return confirm('Are you sure you want to reboot?');")
-    .form-group
-      p.col-sm-offset-2.col-sm-3 Reboot system
-      input(type='hidden', name='_csrf', value=_csrf)
-      .col-sm-offset-3.col-sm-4
-        button.btn.btn-danger(type='submit')
-          i.fas.fa-trash-alt.fa-sm
-          | Reboot system
+  .row
+    form.form-horizontal(action='/system/reboot', method='POST', onsubmit="return confirm('Are you sure you want to reboot?');")
+      .form-group
+        input(type='hidden', name='_csrf', value=_csrf)
+        .col-sm-offset-6
+          button.btn.btn-danger(type='submit')
+            i.fas.fa-trash-alt.fa-sm
+            | Reboot system
 
-  .col-sm-12
-    iframe(width="100%" height="600px" frameborder="0"  src="http://localhost:8080/status")
+  .row
+    .col-sm-12
+      iframe(width="100%" height="600px" frameborder="0"  src="http://localhost:8080/status")
