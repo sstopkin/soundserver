@@ -5,7 +5,7 @@ var soundServerConfig = require('../config/soundserver.json');
 exports.getSystem = (req, res) => {
   let cpuFreq = getCpuFreqData(soundServerConfig.cpuFreqDataPath);
   let cpuTemp = getCpuTempData(soundServerConfig.cpuTempDataPath);
-  let systemData = [{'name':'cpuFreq (MHz)','value':cpuFreq}, {'name':'cpuTemp (°C)','value':cpuTemp}];
+  let systemData = [{'name':'cpuFreq (kHz)','value':cpuFreq}, {'name':'cpuTemp (°C)','value':cpuTemp}];
   res.render('system/system', {
     title: 'System',
     systemData
@@ -45,7 +45,6 @@ function getCpuFreqData(file){
   else {
     // Read the file and do anything you want
     content = fs.readFileSync(file, 'utf-8');
-    content = content.slice(0, -3);
   }
   return content;
 }
