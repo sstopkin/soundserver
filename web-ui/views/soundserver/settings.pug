@@ -33,7 +33,7 @@ block content
                     option(value=frequency selected=(frequency===channel.frequency) ) #{frequency}
               td
                 select.form-control(id='codec' name='codec')
-                  each codec in ["libopus","pcm_alaw","adpcm_g726","pcm_mulaw","libspeex","adpcm_g722"]
+                  each codec in ["adpcm_g722","adpcm_g726","adpcm_ima_qt","adpcm_ima_wav","adpcm_ms","pcm_alaw","pcm_mulaw","pcm_s16be","pcm_s16be_planar","pcm_s16le","pcm_s16le_planar","pcm_s8","pcm_s8_planar","pcm_u16be","pcm_u16le","pcm_u8"]
                     option(value=codec selected=(codec===channel.codec) ) #{codec}
               td
                 button.btn.btn-success(type='submit', placeholder='0') Save
