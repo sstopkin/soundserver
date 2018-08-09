@@ -13,3 +13,22 @@ Copy your service file into the /lib/systemd/system/soundserver.service
 Start it with systemctl start soundserver.service
 Enable it to run on boot with systemctl enable soundserver.
 See logs with journalctl -u soundserver
+
+[Codecs]
+
+adpcm_g722           G.722 ADPCM (decoders: g722 ) (encoders: g722 )
+adpcm_g726           G.726 ADPCM (decoders: g726 ) (encoders: g726 )
+adpcm_ima_qt         ADPCM IMA QuickTime
+adpcm_ima_wav        ADPCM IMA WAV
+adpcm_ms             ADPCM Microsoft
+pcm_alaw             PCM A-law / G.711 A-law
+pcm_mulaw            PCM mu-law / G.711 mu-law
+pcm_s16be            PCM signed 16-bit big-endian
+pcm_s16be_planar     PCM signed 16-bit big-endian planar
+pcm_s16le            PCM signed 16-bit little-endian
+pcm_s16le_planar     PCM signed 16-bit little-endian planar
+pcm_s8               PCM signed 8-bit
+pcm_s8_planar        PCM signed 8-bit planar
+pcm_u16be            PCM unsigned 16-bit big-endian
+pcm_u16le            PCM unsigned 16-bit little-endian
+pcm_u8               PCM unsigned 8-bit
