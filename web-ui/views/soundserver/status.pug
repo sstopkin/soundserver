@@ -12,6 +12,8 @@ block content
           th Status
           th Volume
           th Frequency
+          th Lowpass
+          th Highpass
           th.hidden-xs Codec
       tbody
         for channel in channels
@@ -21,4 +23,6 @@ block content
             td= channel.status
             td= channel.volume
             td= channel.frequency
+            td= channel.lowpass
+            td= channel.highpass
             td.hidden-xs= channel.codec

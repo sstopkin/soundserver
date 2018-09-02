@@ -22,7 +22,6 @@ exports.getSettings = (req, res) => {
     title: 'Settings',
     channels
   });
-   // getSettings('1','volume');
 };
 
 function getChannels(){
@@ -79,16 +78,22 @@ function writeSettings(chId, param, val){
 }
 
 exports.postSettings = (req, res, next) => {
-// id: 1
-// status: on
-// volume: 55
-// frequency: 41000
-// codec: opus
   req.assert('id', 'id must be present').notEmpty();
   // req.assert('status', 'status must be present').notEmpty();
   req.assert('volume', 'volume should be int from 0-100').isInt({ min: 0, max: 100 });
   req.assert('frequency', 'frequency should be present').notEmpty();
   req.assert('codec', 'codec should be present').notEmpty();
+
+  req.assert('lowpass', 'lowpass should be present').isInt({ min: 0, max: 44100 });
+  req.assert('highpass', 'highpass should be present').isInt({ min: 0, max: 44100 });
+
+  let lowpass=req.body.lowpass;
+  let highpass=req.body.highpass;
+
+  if (lowpass=>highpass) {
+    req.flash('errors', { msg: 'highpass should be greater than lowpass' });
+    return res.redirect('/soundserver/settings');
+  }
 
   const errors = req.validationErrors();
 
@@ -111,6 +116,8 @@ shell.exec(soundServerConfig.scriptsDir+'/service.sh '+chId, function(code, stdo
   writeSettings(chId, 'volume', req.body.volume);
   writeSettings(chId, 'frequency', req.body.frequency);
   writeSettings(chId, 'codec', req.body.codec);
+  writeSettings(chId, 'lowpass', lowpass);
+  writeSettings(chId, 'highpass', highpass);
 
   // User.findById(req.user.id, (err, user) => {
   //   if (err) { return next(err); }

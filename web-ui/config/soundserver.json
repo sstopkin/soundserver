@@ -1,7 +1,7 @@
 {
   "channels": "2",
   "dataDir" : "/var/soundserver/data",
-  "paramSet": ["present","status","volume","frequency","codec"],
+  "paramSet": ["present","status","volume","frequency","lowpass","highpass","codec"],
   "scriptsDir": "/var/soundserver/scripts",
   "cpuFreqDataPath": "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq",
   "cpuTempDataPath": "/sys/devices/virtual/thermal/thermal_zone0/temp"
