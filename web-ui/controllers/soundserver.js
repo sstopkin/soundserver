@@ -104,11 +104,11 @@ exports.postSettings = (req, res, next) => {
 
   var chId=req.body.id;
 
-shell.exec(soundServerConfig.scriptsDir+'/service.sh '+chId, function(code, stdout, stderr) {
-  console.log('Exit code:', code);
-  console.log('Program output:', stdout);
-  console.log('Program stderr:', stderr);
-});
+  shell.exec(soundServerConfig.scriptsDir+'/service.sh '+chId, function(code, stdout, stderr) {
+    console.log('Exit code:', code);
+    console.log('Program output:', stdout);
+    console.log('Program stderr:', stderr);
+  });
 
 
   // writeSettings(chId, 'id', req.body.id);

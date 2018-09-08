@@ -18,10 +18,17 @@
             a(href='/soundserver/status') Status
           li(class=(title === 'Settings') ? 'active' : undefined)
             a(href='/soundserver/settings') Settings
-          li(class=(title === 'System') ? 'active' : undefined)
-            a(href='/system') System
           li(class=(title === 'Contact') ? 'active' : undefined)
             a(href='/contact') Contact
+          li(class=dropdown)
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              span System
+              i.caret
+              ul(class='dropdown-menu')
+                li(class=(title === 'Global settings') ? 'active' : undefined)
+                  a(href='/system/global') Global settings
+                li(class=(title === 'Network settings') ? 'active' : undefined)
+                  a(href='/system/networking') Network settings
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title === 'Login') ? 'active' : undefined)

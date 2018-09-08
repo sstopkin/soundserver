@@ -161,9 +161,10 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 /**
  * API examples routes.
  */
-app.get('/system', passportConfig.isAuthenticated, systemController.getSystem);
+app.get('/system/global', passportConfig.isAuthenticated, systemController.getGlobal);
+app.get('/system/networking', passportConfig.isAuthenticated, systemController.getNetworking);
+app.post('/system/networking', passportConfig.isAuthenticated, systemController.postNetworking);
 app.post('/system/reboot', passportConfig.isAuthenticated, systemController.rebootSystem);
-
 /**
  * Soundserver routes.
  */

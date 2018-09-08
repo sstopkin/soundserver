@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Network settings
+
+
+  form.form-horizontal(action='/system/networking', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+
+    .row
+      table.table.table-striped.table-bordered
+        tbody
+          tr
+            td  mode
+            td
+              select.form-control(id='mode', name='mode')
+                each mode in ["static","dhcp"]
+                  option(value=mode selected=(mode===networkingMode) ) #{mode}
+
+    .row
+      table.table.table-striped.table-bordered
+        thead
+          tr
+            th Parameter
+            th Value
+        tbody
+          for parameter in parameters
+            tr
+              td= parameter.name
+              td
+                input.form-control(type='text', name=parameter.name, id=parameter.name, value=parameter.value)
+
+    .row
+      .col-sm-offset-6
+        button.btn.btn-success(type='submit')
+          i.fas.fa-trash-alt.fa-sm
+          | Save

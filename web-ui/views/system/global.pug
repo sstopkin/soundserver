@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   .page-header
-    h3 System
+    h3 Global settings
 
   .row
     table.table.table-striped.table-bordered
@@ -10,11 +10,11 @@ block content
         tr
           th Parameter
           th Value
-          tbody
-            for data in systemData
-              tr
-                td= data.name
-                td= data.value
+      tbody
+        for data in systemData
+          tr
+            td= data.name
+            td= data.value
 
   .row
     form.form-horizontal(action='/system/reboot', method='POST', onsubmit="return confirm('Are you sure you want to reboot?');")
