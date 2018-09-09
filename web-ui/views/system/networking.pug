@@ -12,7 +12,11 @@ block content
       table.table.table-striped.table-bordered
         tbody
           tr
-            td  mode
+            td  hostname
+            td
+              input.form-control(type='text', name=hostname, id=hostname, value=host)
+          tr
+            td  networkingMode
             td
               select.form-control(id='mode', name='mode')
                 each mode in ["static","dhcp"]

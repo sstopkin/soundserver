@@ -15,10 +15,12 @@ exports.getGlobal = (req, res) => {
 exports.getNetworking = (req, res) => {
   let parameters = getNetworkingConfig();
   let networkingMode = getNetworkingMode();
+  let host = getHostname();
   console.log(parameters);
   // let parameters = [{'name':'address','value':'1'}, {'name':'netmask','value':'2'}];
   res.render('system/networking', {
     title: 'Network settings',
+    host,
     networkingMode,
     parameters
   });
@@ -26,6 +28,7 @@ exports.getNetworking = (req, res) => {
 
 exports.postNetworking = (req, res) => {
   req.assert('mode', 'mode must be present').notEmpty();
+  req.assert('hostname', 'hostname must be present').notEmpty();
   let networkingMode = req.body.mode;
 
   if (networkingMode === 'static'){
@@ -49,6 +52,7 @@ exports.postNetworking = (req, res) => {
   writeSettings('gateway', req.body.gateway);
   writeSettings('dns1', req.body.dns1);
   writeSettings('dns2', req.body.dns2);
+  writeSettings('hostname', req.body.hostname);
 
   shell.exec(soundServerConfig.scriptsDir+'/networking.sh', function(code, stdout, stderr) {
     console.log('Exit code:', code);
@@ -101,6 +105,10 @@ function getNetworkingConfig(){
 
 function getNetworkingMode(){
   return fs.readFileSync(soundServerConfig.configDir+'/networking/mode', 'utf8');
+}
+
+function getHostname(){
+  return fs.readFileSync(soundServerConfig.configDir+'/networking/hostname', 'utf8');
 }
 
 function getCpuTempData(file){
