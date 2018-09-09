@@ -32,11 +32,11 @@ exports.postNetworking = (req, res) => {
   let networkingMode = req.body.mode;
 
   if (networkingMode === 'static'){
-    req.assert('address', 'address must be present').notEmpty();
-    req.assert('netmask', 'netmask must be present').notEmpty();
-    req.assert('gateway', 'gateway must be present').notEmpty();
-    req.assert('dns1', 'dns1 must be present').notEmpty();
-    req.assert('dns2', 'dns2 must be present').notEmpty();
+    req.assert('address', 'address must be present and valid').isIP();
+    req.assert('netmask', 'netmask must be present and valid').isIP();
+    req.assert('gateway', 'gateway must be present and valid').isIP();
+    req.assert('dns1', 'dns1 must be present and valid').isIP();
+    req.assert('dns2', 'dns2 must be present and valid').isIP();
   }
 
   const errors = req.validationErrors();

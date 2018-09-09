@@ -28,7 +28,7 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.15.6",
     "express-status-monitor": "^1.1.4",
-    "express-validator": "^5.1.0",
+    "express-validator": "^5.3.0",
     "lob": "^5.2.0",
     "lusca": "^1.5.2",
     "mongoose": "^5.0.12",
@@ -42,7 +42,7 @@
     "pug": "^2.0.3",
     "request": "^2.85.0",
     "stripe": "^5.6.1",
-    "validator": "^9.4.1",
+    "validator": "^10.7.1",
     "shelljs": "^0.8.2"
   },
   "devDependencies": {
