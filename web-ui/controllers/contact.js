@@ -29,10 +29,10 @@ exports.postContact = (req, res) => {
   let fromName;
   let fromEmail;
   if (!req.user) {
-    req.assert('name', 'Name cannot be blank').notEmpty();
-    req.assert('email', 'Email is not valid').isEmail();
+    req.assert('name', 'Поле Name не может быть пустым.').notEmpty();
+    req.assert('email', 'Поле Email должно содержать корректный адрес.').isEmail();
   }
-  req.assert('message', 'Message cannot be blank').notEmpty();
+  req.assert('message', 'Поле Message не может быть пустым.').notEmpty();
 
   const errors = req.validationErrors();
 
@@ -61,7 +61,7 @@ exports.postContact = (req, res) => {
       req.flash('errors', { msg: err.message });
       return res.redirect('/contact');
     }
-    req.flash('success', { msg: 'Email has been sent successfully!' });
+    req.flash('success', { msg: 'Сообщение было отправлено успешно!' });
     res.redirect('/contact');
   });
 };

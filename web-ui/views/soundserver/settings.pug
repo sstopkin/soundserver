@@ -7,15 +7,15 @@ block content
     table.table.table-striped.table-bordered
       thead
         tr
-          th Channel
-          th Present
-          th Status
-          th Volume
-          th Frequency
-          td Lowpass
-          td Highpass
-          th.hidden-xs Codec
-          th.hidden-xs Save
+          th Канал
+          th Наличие
+          th Статус
+          th Громкость
+          th Частота
+          td НЧ
+          td ВЧ
+          th.hidden-xs Кодек
+          th.hidden-xs Действие
       tbody
         for channel in channels
           tr
@@ -42,4 +42,4 @@ block content
                   each codec in ["g722","g726","adpcm_ima_qt","adpcm_ima_wav","libgsm","libopus","pcm_alaw","pcm_mulaw","pcm_s16be","pcm_s16be_planar","pcm_s16le","pcm_s16le_planar","pcm_s8","pcm_s8_planar","pcm_u16be","pcm_u16le","pcm_u8","libspeex"]
                     option(value=codec selected=(codec===channel.codec) ) #{codec}
               td
-                button.btn.btn-success(type='submit', placeholder='0') Save
+                button.btn.btn-success(type='submit', placeholder='0') Сохранить

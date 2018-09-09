@@ -72,26 +72,25 @@ function writeSettings(chId, param, val){
     if(err) {
         return console.log(err);
     }
-
-    console.log("The file was saved!");
+    console.log("The file was saved! "+param+' '+val);
   });
 }
 
 exports.postSettings = (req, res, next) => {
-  req.assert('id', 'id must be present').notEmpty();
+  req.assert('id', 'Поле id не может быть пустым.').notEmpty();
   // req.assert('status', 'status must be present').notEmpty();
-  req.assert('volume', 'volume should be int from 0-100').isInt({ min: 0, max: 100 });
-  req.assert('frequency', 'frequency should be present').notEmpty();
-  req.assert('codec', 'codec should be present').notEmpty();
+  req.assert('volume', 'Значение volume должно быть int в диапазоне 0-100').isInt({ min: 0, max: 100 });
+  req.assert('frequency', 'Поле frequency не может быть пустым.').notEmpty();
+  req.assert('codec', 'Поле codec не может быть пустым.').notEmpty();
 
-  req.assert('lowpass', 'lowpass should be present').isInt({ min: 0, max: 44100 });
-  req.assert('highpass', 'highpass should be present').isInt({ min: 0, max: 44100 });
+  req.assert('lowpass', 'Поле lowpass не может быть пустым.').isInt({ min: 0, max: 44100 });
+  req.assert('highpass', 'Поле highpass не может быть пустым.').isInt({ min: 0, max: 44100 });
 
   let lowpass=req.body.lowpass;
   let highpass=req.body.highpass;
 
   if (lowpass=>highpass) {
-    req.flash('errors', { msg: 'highpass should be greater than lowpass' });
+    req.flash('errors', { msg: 'Значение поля highpass должно быть больше, чем lowpass.' });
     return res.redirect('/soundserver/settings');
   }
 
@@ -125,7 +124,7 @@ exports.postSettings = (req, res, next) => {
   //   user.save((err) => {
   //     if (err) { return next(err); }
   //     req.flash('success', { msg: 'Password has been changed.' });
-      req.flash('success', { msg: 'Settings has been changed.' });
+      req.flash('success', { msg: 'Настройки были успешно сохранены.' });
       res.redirect('/soundserver/settings');
   //   });
   // });

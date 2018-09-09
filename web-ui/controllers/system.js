@@ -32,11 +32,11 @@ exports.postNetworking = (req, res) => {
   let networkingMode = req.body.mode;
 
   if (networkingMode === 'static'){
-    req.assert('address', 'address must be present and valid').isIP();
-    req.assert('netmask', 'netmask must be present and valid').isIP();
-    req.assert('gateway', 'gateway must be present and valid').isIP();
-    req.assert('dns1', 'dns1 must be present and valid').isIP();
-    req.assert('dns2', 'dns2 must be present and valid').isIP();
+    req.assert('address', 'Поле address не может быть пустым.').isIP();
+    req.assert('netmask', 'Поле netmask не может быть пустым.').isIP();
+    req.assert('gateway', 'Поле gateway не может быть пустым.').isIP();
+    req.assert('dns1', 'Поле dns1 не может быть пустым.').isIP();
+    req.assert('dns2', 'Поле dns2 не может быть пустым.').isIP();
   }
 
   const errors = req.validationErrors();
@@ -60,7 +60,7 @@ exports.postNetworking = (req, res) => {
     console.log('Program stderr:', stderr);
   });
 
-  req.flash('success', { msg: 'Required to reboot server to apply new network settings.' });
+  req.flash('success', { msg: 'Требуется перезапустить сервер для применения новых параметров.' });
   res.redirect('/system/networking');
 }
 
@@ -81,7 +81,7 @@ function writeSettings(param, val){
 }
 
 exports.rebootSystem = (req, res) => {
-  req.flash('success', { msg: 'Restarting system. Please wait..' });
+  req.flash('success', { msg: 'Перезапуск системы. Пожалуйста, подождите..' });
   console.log("rebootSystem");
   res.redirect('/system');
 }

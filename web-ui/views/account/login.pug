@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   .page-header
-    h3 Sign in
+    h3 Вход в систему
   form.form-horizontal(method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group
@@ -10,15 +10,15 @@ block content
       .col-sm-7
         input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
     .form-group
-      label.col-sm-3.control-label(for='password') Password
+      label.col-sm-3.control-label(for='password') Пароль
       .col-sm-7
-        input.form-control(type='password', name='password', id='password', placeholder='Password', required)
+        input.form-control(type='password', name='password', id='password', placeholder='Пароль', required)
     .form-group
       .col-sm-offset-3.col-sm-7
         button.col-sm-3.btn.btn-primary(type='submit')
           i.far.fa-user.fa-sm
-          | Login
-        a.btn.btn-link(href='/forgot') Forgot your password?
+          | Войти
+        a.btn.btn-link(href='/forgot') Забыли пароль?
     .form-group
       .col-sm-offset-3.col-sm-7
         hr
