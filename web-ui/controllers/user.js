@@ -121,7 +121,7 @@ exports.postSignup = (req, res, next) => {
  */
 exports.getAccount = (req, res) => {
   res.render('account/profile', {
-    title: 'Account Management'
+    title: 'Управление аккаунтом'
   });
 };
 
@@ -233,7 +233,7 @@ exports.getReset = (req, res, next) => {
         return res.redirect('/forgot');
       }
       res.render('account/reset', {
-        title: 'Password Reset'
+        title: 'Сброс пароля'
       });
     });
 };
