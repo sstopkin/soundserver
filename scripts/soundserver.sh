@@ -4,7 +4,7 @@
 # description: Soundserver daemon
 # processname: soundserver
 
-DAEMON_PATH="/home/best/soundserver-webui/soundserver-webui/"
+DAEMON_PATH="/var/soundserver/"
 
 DAEMON=./service.sh
 DAEMONOPTS="-my opts"
