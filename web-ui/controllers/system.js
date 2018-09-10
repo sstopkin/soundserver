@@ -3,12 +3,9 @@ const fs = require('fs');
 var soundServerConfig = require('../config/soundserver.json');
 
 exports.getGlobal = (req, res) => {
-  let cpuFreq = getCpuFreqData(soundServerConfig.cpuFreqDataPath);
-  let cpuTemp = getCpuTempData(soundServerConfig.cpuTempDataPath);
-  let systemData = [{'name':'CPU Frequency (kHz)','value':cpuFreq}, {'name':'CPU Temperature (°C)','value':cpuTemp}];
+
   res.render('system/global', {
-    title: 'Global settings',
-    systemData
+    title: 'Global settings'
   });
 };
 
@@ -109,35 +106,4 @@ function getNetworkingMode(){
 
 function getHostname(){
   return fs.readFileSync(soundServerConfig.configDir+'/networking/hostname', 'utf8');
-}
-
-function getCpuTempData(file){
-  let content = '';
-  // Check that the file exists locally
-  if(!fs.existsSync(file)) {
-    content = 'n/a'
-    console.log("File not found - " + file);
-  }
-  // The file *does* exist
-  else {
-    // Read the file and do anything you want
-    content = fs.readFileSync(file, 'utf-8');
-    content = [content.slice(0, 2), ',', content.slice(2)].join('');
-  }
-  return content;
-}
-
-function getCpuFreqData(file){
-  let content = '';
-  // Check that the file exists locally
-  if(!fs.existsSync(file)) {
-    content = 'n/a'
-    console.log("File not found - " + file);
-  }
-  // The file *does* exist
-  else {
-    // Read the file and do anything you want
-    content = fs.readFileSync(file, 'utf-8');
-  }
-  return content;
 }

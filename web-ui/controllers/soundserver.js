@@ -9,20 +9,58 @@ var soundServerConfig = require('../config/soundserver.json');
  * Get all channels
  */
 exports.getStatus = (req, res) => {
+  let cpuFreq = getCpuFreqData(soundServerConfig.cpuFreqDataPath);
+  let cpuTemp = getCpuTempData(soundServerConfig.cpuTempDataPath);
+  let systemData = [{'name':'CPU Frequency (kHz)','value':cpuFreq}, {'name':'CPU Temperature (°C)','value':cpuTemp}];
   var channels=getChannels();
   res.render('soundserver/status', {
     title: 'Status',
-    channels
+    channels,
+    systemData
   });
 };
 
 exports.getSettings = (req, res) => {
+
   var channels=getChannels();
   res.render('soundserver/settings', {
     title: 'Settings',
     channels
   });
 };
+
+
+function getCpuTempData(file){
+  let content = '';
+  // Check that the file exists locally
+  if(!fs.existsSync(file)) {
+    content = 'n/a'
+    console.log("File not found - " + file);
+  }
+  // The file *does* exist
+  else {
+    // Read the file and do anything you want
+    content = fs.readFileSync(file, 'utf-8');
+    content = [content.slice(0, 2), ',', content.slice(2)].join('');
+  }
+  return content;
+}
+
+function getCpuFreqData(file){
+  let content = '';
+  // Check that the file exists locally
+  if(!fs.existsSync(file)) {
+    content = 'n/a'
+    console.log("File not found - " + file);
+  }
+  // The file *does* exist
+  else {
+    // Read the file and do anything you want
+    content = fs.readFileSync(file, 'utf-8');
+  }
+  return content;
+}
+
 
 function getChannels(){
   var channelsCount=soundServerConfig.channels;
