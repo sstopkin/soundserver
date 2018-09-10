@@ -14,7 +14,7 @@ exports.getStatus = (req, res) => {
   let systemData = [{'name':'CPU Frequency (kHz)','value':cpuFreq}, {'name':'CPU Temperature (°C)','value':cpuTemp}];
   var channels=getChannels();
   res.render('soundserver/status', {
-    title: 'Status',
+    title: 'Статус',
     channels,
     systemData
   });
@@ -24,7 +24,7 @@ exports.getSettings = (req, res) => {
 
   var channels=getChannels();
   res.render('soundserver/settings', {
-    title: 'Settings',
+    title: 'Настройки',
     channels
   });
 };

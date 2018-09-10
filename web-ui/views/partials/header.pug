@@ -11,30 +11,28 @@
         | Sound Server
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        li(class=(title === 'Home') ? 'active' : undefined)
-          a(href='/') Home
+        li(class=(title === 'Главная') ? 'active' : undefined)
+          a(href='/') Главная
         if user
-          li(class=(title === 'Status') ? 'active' : undefined)
-            a(href='/soundserver/status') Status
-          li(class=(title === 'Settings') ? 'active' : undefined)
-            a(href='/soundserver/settings') Settings
-          li(class=(title === 'Contact') ? 'active' : undefined)
-            a(href='/contact') Contact
+          li(class=(title === 'Статус') ? 'active' : undefined)
+            a(href='/soundserver/status') Статус
+          li(class=(title === 'Настройки') ? 'active' : undefined)
+            a(href='/soundserver/settings') Настройки
           li(class=dropdown)
             a.dropdown-toggle(href='#', data-toggle='dropdown')
-              span System
+              span Система
               i.caret
               ul(class='dropdown-menu')
-                li(class=(title === 'Global settings') ? 'active' : undefined)
-                  a(href='/system/global') Global settings
-                li(class=(title === 'Network settings') ? 'active' : undefined)
-                  a(href='/system/networking') Network settings
+                li(class=(title === 'Основные настройки') ? 'active' : undefined)
+                  a(href='/system/global') Основные настройки
+                li(class=(title === 'Сетевые настройки') ? 'active' : undefined)
+                  a(href='/system/networking') Сетевые настройки
       ul.nav.navbar-nav.navbar-right
         if !user
-          li(class=(title === 'Login') ? 'active' : undefined)
-            a(href='/login') Login
+          li(class=(title === 'Вход в систему') ? 'active' : undefined)
+            a(href='/login') Вход в систему
         else
-          li.dropdown(class=(title === 'Account Management') ? 'active' : undefined)
+          li.dropdown(class=(title === 'Управление аккаунтом') ? 'active' : undefined)
             a.dropdown-toggle(href='#', data-toggle='dropdown')
               if user.profile.picture
                 img(src=user.profile.picture)
@@ -44,7 +42,7 @@
               i.caret
             ul.dropdown-menu
               li
-                a(href='/account') My Account
+                a(href='/account') Мой аккаунт
               li.divider
               li
-                a(href='/logout') Logout
+                a(href='/logout') Выйти

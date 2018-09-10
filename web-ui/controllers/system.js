@@ -5,7 +5,7 @@ var soundServerConfig = require('../config/soundserver.json');
 exports.getGlobal = (req, res) => {
 
   res.render('system/global', {
-    title: 'Global settings'
+    title: 'Основные настройки'
   });
 };
 
@@ -16,7 +16,7 @@ exports.getNetworking = (req, res) => {
   console.log(parameters);
   // let parameters = [{'name':'address','value':'1'}, {'name':'netmask','value':'2'}];
   res.render('system/networking', {
-    title: 'Network settings',
+    title: 'Сетевые настройки',
     host,
     networkingMode,
     parameters
