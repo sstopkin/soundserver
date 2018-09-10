@@ -5,18 +5,6 @@ block content
     h3 Global settings
 
   .row
-    table.table.table-striped.table-bordered
-      thead
-        tr
-          th Parameter
-          th Value
-      tbody
-        for data in systemData
-          tr
-            td= data.name
-            td= data.value
-
-  .row
     form.form-horizontal(action='/system/reboot', method='POST', onsubmit="return confirm('Вы уверены, что хотите перезапустить сервер?');")
       .form-group
         input(type='hidden', name='_csrf', value=_csrf)
