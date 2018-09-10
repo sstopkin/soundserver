@@ -86,11 +86,11 @@ exports.postSettings = (req, res, next) => {
   req.assert('lowpass', 'Поле lowpass не может быть пустым.').isInt({ min: 0, max: 44100 });
   req.assert('highpass', 'Поле highpass не может быть пустым.').isInt({ min: 0, max: 44100 });
 
-  let lowpass=req.body.lowpass;
-  let highpass=req.body.highpass;
-
-  if (lowpass=>highpass) {
-    req.flash('errors', { msg: 'Значение поля highpass должно быть больше, чем lowpass.' });
+  let lowpass=req.body.lowpass;//граница ВЧ
+  let highpass=req.body.highpass;//граница НЧ
+  console.log("postSettings: lowpass-"+lowpass+" highpass-"+highpass);
+  if (lowpass<=highpass) {
+    req.flash('errors', { msg: 'Значение поля highpass должно быть меньше, чем lowpass.' });
     return res.redirect('/soundserver/settings');
   }
 
