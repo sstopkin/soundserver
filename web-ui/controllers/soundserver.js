@@ -11,7 +11,7 @@ var soundServerConfig = require('../config/soundserver.json');
 exports.getStatus = (req, res) => {
   let cpuFreq = getCpuFreqData(soundServerConfig.cpuFreqDataPath);
   let cpuTemp = getCpuTempData(soundServerConfig.cpuTempDataPath);
-  let systemData = [{'name':'CPU Frequency (kHz)','value':cpuFreq}, {'name':'CPU Temperature (°C)','value':cpuTemp}];
+  let systemData = [{'name':'Частота процессора (kHz)','value':cpuFreq}, {'name':'Температура процессора (°C)','value':cpuTemp}];
   var channels=getChannels();
   res.render('soundserver/status', {
     title: 'Статус',
