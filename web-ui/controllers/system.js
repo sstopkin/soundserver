@@ -24,8 +24,8 @@ exports.getNetworking = (req, res) => {
 };
 
 exports.postNetworking = (req, res) => {
-  req.assert('mode', 'mode must be present').notEmpty();
-  req.assert('hostname', 'hostname must be present').notEmpty();
+  req.assert('mode', 'Поле mode не может быть пустым.').notEmpty();
+  req.assert('hostname', 'Поле hostname не может быть пустым.').notEmpty();
   let networkingMode = req.body.mode;
 
   if (networkingMode === 'static'){
