@@ -10,7 +10,8 @@ exports.getGlobal = (req, res) => {
       {'name':'Время (ЧЧ:ММ:СС)','value':time},
       {'name':'Часовой пояс (UTCXX)','value':timezone}];
   res.render('system/global', {
-    title: 'Основные настройки'
+    title: 'Основные настройки',
+    parameters
   });
 };
 
