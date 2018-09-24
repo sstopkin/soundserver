@@ -153,12 +153,13 @@ app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
-app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+// app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
 /**
  * API examples routes.
  */
 app.get('/system/global', passportConfig.isAuthenticated, systemController.getGlobal);
+app.post('/system/global', passportConfig.isAuthenticated, systemController.getGlobal);
 app.get('/system/networking', passportConfig.isAuthenticated, systemController.getNetworking);
 app.post('/system/networking', passportConfig.isAuthenticated, systemController.postNetworking);
 app.post('/system/reboot', passportConfig.isAuthenticated, systemController.rebootSystem);
