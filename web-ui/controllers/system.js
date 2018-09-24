@@ -3,7 +3,12 @@ const fs = require('fs');
 var soundServerConfig = require('../config/soundserver.json');
 
 exports.getGlobal = (req, res) => {
-
+  let date = getParameterByName('global', 'date');
+  let time = getParameterByName('global', 'time');
+  let timezone = getParameterByName('global', 'timezone');
+  let parameters = [{'name':'Дата (ГГГГ-ММ-ДД)','value':date},
+      {'name':'Время (ЧЧ:ММ:СС)','value':time},
+      {'name':'Часовой пояс (UTCXX)','value':timezone}];
   res.render('system/global', {
     title: 'Основные настройки'
   });
@@ -11,9 +16,9 @@ exports.getGlobal = (req, res) => {
 
 exports.getNetworking = (req, res) => {
   let parameters = getNetworkingConfig();
-  let networkingMode = getNetworkingMode();
-  let host = getHostname();
-  console.log(parameters);
+  let networkingMode = getParameterByName('networking', 'mode');
+  let host = getParameterByName('networking', 'hostname');
+  console.log('getNetworking: ' + parameters);
   // let parameters = [{'name':'address','value':'1'}, {'name':'netmask','value':'2'}];
   res.render('system/networking', {
     title: 'Сетевые настройки',
@@ -22,6 +27,31 @@ exports.getNetworking = (req, res) => {
     parameters
   });
 };
+
+exports.postGlobal = (req, res) => {
+  req.assert('date', 'Поле date не может быть пустым.').notEmpty();
+  req.assert('time', 'Поле time не может быть пустым.').notEmpty();
+  req.assert('timezone', 'Поле timezone не может быть пустым.').notEmpty();
+  const errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/system/global');
+  }
+
+  writeSettings('global', 'date', req.body.date);
+  writeSettings('global', 'time', req.body.time);
+  writeSettings('global', 'timezone', req.body.timezone);
+
+  shell.exec(soundServerConfig.scriptsDir+'/datetime.sh', function(code, stdout, stderr) {
+    console.log('Exit code:', code);
+    console.log('Program output:', stdout);
+    console.log('Program stderr:', stderr);
+  });
+
+  req.flash('success', { msg: 'Требуется перезапустить сервер для применения новых параметров.' });
+  res.redirect('/system/global');
+}
 
 exports.postNetworking = (req, res) => {
   req.assert('mode', 'Поле mode не может быть пустым.').notEmpty();
@@ -43,13 +73,13 @@ exports.postNetworking = (req, res) => {
     return res.redirect('/system/networking');
   }
 
-  writeSettings('mode', networkingMode);
-  writeSettings('address', req.body.address);
-  writeSettings('netmask', req.body.netmask);
-  writeSettings('gateway', req.body.gateway);
-  writeSettings('dns1', req.body.dns1);
-  writeSettings('dns2', req.body.dns2);
-  writeSettings('hostname', req.body.hostname);
+  writeSettings('networking', 'mode', networkingMode);
+  writeSettings('networking', 'address', req.body.address);
+  writeSettings('networking', 'netmask', req.body.netmask);
+  writeSettings('networking', 'gateway', req.body.gateway);
+  writeSettings('networking', 'dns1', req.body.dns1);
+  writeSettings('networking', 'dns2', req.body.dns2);
+  writeSettings('networking', 'hostname', req.body.hostname);
 
   shell.exec(soundServerConfig.scriptsDir+'/networking.sh', function(code, stdout, stderr) {
     console.log('Exit code:', code);
@@ -61,7 +91,7 @@ exports.postNetworking = (req, res) => {
   res.redirect('/system/networking');
 }
 
-function writeSettings(param, val){
+function writeSettings(type, param, val){
   console.log(param, val);
 //   try {
 //     var data = fs.readFileSync(dataDir+'/'+chId +'/'+param, 'utf8');
@@ -69,11 +99,11 @@ function writeSettings(param, val){
 //   } catch(e) {
 //     console.log('Error:', e.stack);
 //   }
-  fs.writeFile(soundServerConfig.configDir+'/networking/'+param, val, function(err) {
+  fs.writeFile(soundServerConfig.configDir+'/'+type+'/'+param, val, function(err) {
     if(err) {
         return console.log(err);
     }
-    console.log("The file was saved! "+param+' '+val);
+    console.log("The file was saved! "+type+' '+param+' '+val);
   });
 }
 
@@ -106,10 +136,6 @@ function getNetworkingConfig(){
   return parameters;
 }
 
-function getNetworkingMode(){
-  return fs.readFileSync(soundServerConfig.configDir+'/networking/mode', 'utf8');
-}
-
-function getHostname(){
-  return fs.readFileSync(soundServerConfig.configDir+'/networking/hostname', 'utf8');
+function getParameterByName(type, paramName){
+  return fs.readFileSync(soundServerConfig.configDir+'/'+type+'/'+paramName, 'utf8');
 }

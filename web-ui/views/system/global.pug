@@ -4,6 +4,28 @@ block content
   .page-header
     h3 Основные настройки
 
+  form.form-horizontal(action='/system/global', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+
+    .row
+      table.table.table-striped.table-bordered
+        thead
+          tr
+            th Параметр
+            th Значение
+        tbody
+          for parameter in parameters
+            tr
+              td= parameter.name
+              td
+                input.form-control(type='text', name=parameter.name, id=parameter.name, value=parameter.value)
+
+    .row
+      .col-sm-offset-6
+        button.btn.btn-success(type='submit')
+          i.fas.fa-trash-alt.fa-sm
+          | Сохранить
+
   .row
     form.form-horizontal(action='/system/reboot', method='POST', onsubmit="return confirm('Вы уверены, что хотите перезапустить сервер?');")
       .form-group
