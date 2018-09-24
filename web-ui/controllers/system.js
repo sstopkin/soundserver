@@ -6,9 +6,9 @@ exports.getGlobal = (req, res) => {
   let date = getParameterByName('global', 'date');
   let time = getParameterByName('global', 'time');
   let timezone = getParameterByName('global', 'timezone');
-  let parameters = [{'name':'Дата (ГГГГ-ММ-ДД)','value':date},
-      {'name':'Время (ЧЧ:ММ:СС)','value':time},
-      {'name':'Часовой пояс (UTCXX)','value':timezone}];
+  let parameters = [{'title':'Дата (ГГГГ-ММ-ДД)', 'name':'date', 'value':date},
+      {'title':'Время (ЧЧ:ММ:СС)', 'name':'time', 'value':time},
+      {'title':'Часовой пояс (UTCXX)', 'name':'timezone', 'value':timezone}];
   res.render('system/global', {
     title: 'Основные настройки',
     parameters
