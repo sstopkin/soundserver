@@ -31,7 +31,7 @@ block content
                 input.form-control(type='text', name='volume', id='volume', placeholder='0', required, value=channel.volume)
               td
                 select.form-control(id='frequency', name='frequency')
-                  each frequency in ["44100","32000","22050","16000","11025","8000"]
+                  each frequency in ["32000","22050","16000","11025","8000"]
                     option(value=frequency selected=(frequency===channel.frequency) ) #{frequency}
               td
                 input.form-control(type='text', name='lowpass', id='lowpass', placeholder='0', required, value=channel.lowpass)
@@ -39,7 +39,7 @@ block content
                 input.form-control(type='text', name='highpass', id='highpass', placeholder='0', required, value=channel.highpass)
               td
                 select.form-control(id='codec' name='codec')
-                  each codec in ["g722","g726","adpcm_ima_qt","adpcm_ima_wav","libgsm","libopus","pcm_alaw","pcm_mulaw","pcm_s16le","pcm_s16le_planar","pcm_s8","pcm_s8_planar","pcm_u16le","pcm_u8","libspeex"]
+                each codec in ["libopus","pcm_alaw","pcm_mulaw","pcm_s16le","pcm_s16be","pcm_s8","pcm_u16le","pcm_u16be","pcm_u8","libspeex"]
                     option(value=codec selected=(codec===channel.codec) ) #{codec}
               td
                 button.btn.btn-success(type='submit', placeholder='0') Сохранить
