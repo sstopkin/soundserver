@@ -80,7 +80,13 @@ function writeSettings(param, val){
 exports.rebootSystem = (req, res) => {
   req.flash('success', { msg: 'Перезапуск системы. Пожалуйста, подождите..' });
   console.log("rebootSystem");
-  res.redirect('/system');
+  var exec = require('child_process').exec;
+  exec('systemctl reboot', function(code, stdout, stderr) {
+    console.log('Exit code:', code);
+    console.log('Program output:', stdout);
+    console.log('Program stderr:', stderr);
+  });
+  res.redirect('/system/global');
 }
 
 function getNetworkingConfig(){
