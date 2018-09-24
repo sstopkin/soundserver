@@ -159,7 +159,7 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
  * API examples routes.
  */
 app.get('/system/global', passportConfig.isAuthenticated, systemController.getGlobal);
-app.post('/system/global', passportConfig.isAuthenticated, systemController.getGlobal);
+app.post('/system/global', passportConfig.isAuthenticated, systemController.postGlobal);
 app.get('/system/networking', passportConfig.isAuthenticated, systemController.getNetworking);
 app.post('/system/networking', passportConfig.isAuthenticated, systemController.postNetworking);
 app.post('/system/reboot', passportConfig.isAuthenticated, systemController.rebootSystem);
