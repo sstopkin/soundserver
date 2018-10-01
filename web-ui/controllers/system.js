@@ -158,7 +158,7 @@ function getParameterByName(type, paramName){
 // https://stackoverflow.com/a/14892796
 function isValidTime(timeString) {
     var timeFormat = /^(?:2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$/;
-    return timeFormat.test(strTime);
+    return timeFormat.test(timeString);
 }
 
 // https://stackoverflow.com/questions/6177975/how-to-validate-date-with-format-mm-dd-yyyy-in-javascript
