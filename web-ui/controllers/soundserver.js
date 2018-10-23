@@ -121,7 +121,7 @@ exports.postSettings = (req, res, next) => {
   req.assert('frequency', 'Поле frequency не может быть пустым.').notEmpty();
   req.assert('codec', 'Поле codec не может быть пустым.').notEmpty();
 
-  req.assert('filter', 'Поле filter не может быть пустым.').notEmpty();
+  // req.assert('filter', 'Поле filter не может быть пустым.').notEmpty();
   req.assert('lowpass', 'Поле lowpass не может быть пустым.').isInt({ min: 0, max: 44100 });
   req.assert('highpass', 'Поле highpass не может быть пустым.').isInt({ min: 0, max: 44100 });
 
