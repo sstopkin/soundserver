@@ -25,6 +25,7 @@ block content
           th Статус
           th Громкость
           th Частота
+          th Фильтр
           th Граница ВЧ
           th Граница НЧ
           th.hidden-xs Кодек
@@ -36,6 +37,7 @@ block content
             td= channel.status
             td= channel.volume
             td= channel.frequency
+            td= channel.filter
             td= channel.lowpass
             td= channel.highpass
             td.hidden-xs= channel.codec

@@ -34,6 +34,8 @@ block content
                   each frequency in ["32000","22050","16000","11025","8000"]
                     option(value=frequency selected=(frequency===channel.frequency) ) #{frequency}
               td
+                input.form-control(type='checkbox', name='filter', checked=(channel.filter==='true' ? true : false))
+              td
                 input.form-control(type='text', name='lowpass', id='lowpass', placeholder='0', required, value=channel.lowpass)
               td
                 input.form-control(type='text', name='highpass', id='highpass', placeholder='0', required, value=channel.highpass)
